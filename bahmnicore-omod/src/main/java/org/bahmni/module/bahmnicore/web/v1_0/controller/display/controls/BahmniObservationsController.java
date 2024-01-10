@@ -6,6 +6,7 @@ import org.bahmni.module.bahmnicore.extensions.BahmniExtensions;
 import org.bahmni.module.bahmnicore.obs.ObservationsAdder;
 import org.bahmni.module.bahmnicore.service.BahmniObsService;
 import org.bahmni.module.bahmnicore.util.MiscUtils;
+import org.bahmni.module.bahmnicore.web.v1_0.LocaleResolver;
 import org.openmrs.Concept;
 import org.openmrs.ConceptSearchResult;
 import org.openmrs.Visit;
@@ -34,6 +35,8 @@ import java.util.Locale;
 import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
+
+import static org.bahmni.module.bahmnicore.web.v1_0.LocaleResolver.identifyLocale;
 
 @Controller
 @RequestMapping(value = "/rest/" + RestConstants.VERSION_1 + "/bahmnicore/observations")
@@ -90,18 +93,6 @@ public class BahmniObservationsController extends BaseRestController {
             }
         }
         return new ArrayList<>(conceptSet);
-    }
-
-    private Locale identifyLocale(String locale) {
-        if (locale != null && !locale.isEmpty()) {
-            Locale searchLocale = LocaleUtility.fromSpecification(locale);
-            if (searchLocale.getLanguage().isEmpty()) {
-                throw new APIException("Invalid locale: " + locale);
-            }
-            return searchLocale;
-        } else {
-            return LocaleUtility.getDefaultLocale();
-        }
     }
 
     @RequestMapping(method = RequestMethod.GET, params = {"visitUuid"})
