@@ -21,3 +21,4 @@ This module provides necessary services for running Bahmni
 ## Deploy
 
 Copy ```bahmni-core/bahmnicore-omod/target/bahmnicore-omod-VERSION-SNAPSHOT.omod``` into OpenMRS modules directory and restart OpenMRS
+a
